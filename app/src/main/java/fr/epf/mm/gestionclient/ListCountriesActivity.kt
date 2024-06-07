@@ -1,6 +1,5 @@
 package fr.epf.mm.gestionclient
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -16,7 +15,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 
-private const val TAG = "ListClientActivity"
+private const val TAG = "ListCountriesActivity"
 
 class ListCountriesActivity : AppCompatActivity() {
 
@@ -35,15 +34,13 @@ class ListCountriesActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.list_clients, menu)
+        menuInflater.inflate(R.menu.list_countries, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.action_add_client -> {
-                startActivity(Intent(this, AddClientActivity::class.java))
-            }
+
             R.id.action_synchro -> {
                 synchro()
             }
@@ -79,11 +76,11 @@ class ListCountriesActivity : AppCompatActivity() {
 
             val countries = users.results.map {
                 Country(
-                    it.name.last, it.name.first, it.
+                    it.postalcode, it.name, it.countryCode
                 )
             }
 
-            val adapter = ClientAdapter(countries)
+            val adapter = CountriesAdapter(countries)
 
             recyclerView.adapter = adapter
 

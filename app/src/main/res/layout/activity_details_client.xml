@@ -7,7 +7,7 @@
     tools:context=".DetailsCountriesActivity">
 
     <TextView
-        android:id="@+id/details_client_lastname_textview"
+        android:id="@+id/details_country_name_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,7 +24,7 @@
         app:layout_constraintGuide_begin="191dp" />
 
     <ImageView
-        android:id="@+id/details_client_imageview"
+        android:id="@+id/details_country_imageview"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:scaleType="fitXY"
@@ -35,7 +35,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <Button
-        android:id="@+id/favoris_button"
+        android:id="@+id/favorites_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="96dp"

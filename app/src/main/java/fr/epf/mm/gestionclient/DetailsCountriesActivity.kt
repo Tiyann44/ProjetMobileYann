@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -18,16 +19,16 @@ class DetailsCountriesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details_client)
 
-        val lastNameTextView =
-            findViewById<TextView>(R.id.details_client_lastname_textview)
+        val NameTextView =
+            findViewById<TextView>(R.id.details_country_name_textview)
 
-        val imageView = findViewById<ImageView>(R.id.details_client_imageview)
+        val imageView = findViewById<ImageView>(R.id.details_country_imageview)
 
         intent.extras?.apply {
-            val country = getParcelable(CLIENT_ID_EXTRA) as? Country
+            val country = getParcelable(COUNTRY_ID_EXTRA) as? Country
 
             country?.let {
-                lastNameTextView.text = it.postalcode
+                NameTextView.text = it.postalcode
                 imageView.setImageResource(country.getImage())
             }
         }
@@ -49,5 +50,11 @@ class DetailsCountriesActivity : AppCompatActivity() {
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             getImage.launch(intent)
         }
+
+        val favoritesButton = findViewById<Button>(R.id.favorites_button)
+        favoritesButton.click {
+            val intent = Intent(this, ListCountriesActivity::class.java)
+            startActivity(intent)
     }
+}
 }

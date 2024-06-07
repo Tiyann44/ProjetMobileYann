@@ -10,13 +10,8 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        val addButton = findViewById<Button>(R.id.home_add_button)
         val listButton = findViewById<Button>(R.id.home_list_button)
 
-        addButton.click {
-            val intent = Intent(this, AddClientActivity::class.java)
-            startActivity(intent)
-        }
 
         listButton.click {
             val intent = Intent(this, ListCountriesActivity::class.java)

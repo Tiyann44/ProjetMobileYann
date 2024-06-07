@@ -7,7 +7,7 @@
     tools:context=".ListCountriesActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_favoris"
+        android:id="@+id/activity_favorites_recyclerview"
         android:layout_width="409dp"
         android:layout_height="729dp"
         tools:itemCount="80"

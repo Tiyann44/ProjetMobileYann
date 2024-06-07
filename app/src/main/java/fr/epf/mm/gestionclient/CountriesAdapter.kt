@@ -16,12 +16,12 @@ import fr.epf.mm.gestionclient.model.Country
 //        super(view)
 //    }
 
-const val CLIENT_ID_EXTRA = "clientId"
+const val COUNTRY_ID_EXTRA = "countryId"
 
 class ClientViewHolder(view : View) : RecyclerView.ViewHolder(view)
 
 
-class ClientAdapter(val countries: List<Country>) : RecyclerView.Adapter<ClientViewHolder>(){
+class CountriesAdapter(val countries: List<Country>) : RecyclerView.Adapter<ClientViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClientViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view = layoutInflater.inflate(R.layout.client_view, parent, false)
@@ -48,7 +48,7 @@ class ClientAdapter(val countries: List<Country>) : RecyclerView.Adapter<ClientV
         cardVIew.click {
             with(it.context){
                 val intent = Intent(this, DetailsCountriesActivity::class.java)
-                intent.putExtra(CLIENT_ID_EXTRA, client)
+                intent.putExtra(COUNTRY_ID_EXTRA, client)
                 startActivity(intent)
             }
         }
