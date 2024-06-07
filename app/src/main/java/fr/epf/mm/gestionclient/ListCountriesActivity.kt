@@ -1,5 +1,6 @@
 package fr.epf.mm.gestionclient
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -13,7 +14,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-
 
 private const val TAG = "ListCountriesActivity"
 
@@ -41,6 +41,10 @@ class ListCountriesActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
 
+            R.id.action_favorites -> {
+                startActivity(Intent(this, FavoritesActivity::class.java))
+            }
+
             R.id.action_synchro -> {
                 synchro()
             }
@@ -58,23 +62,23 @@ class ListCountriesActivity : AppCompatActivity() {
             .build()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://randomuser.me/")
+            .baseUrl("http/api.geonames.org/")
             .addConverterFactory(MoshiConverterFactory.create())
             .client(client)
             .build()
 
-        val userService =
-            retrofit.create(RandomUserService::class.java)
+        val CountryService =
+            retrofit.create(RandomCountryService::class.java)
 
 //        CoroutineScope(Dispatchers.IO).launch {
 //            val users = userService.getUsers(15)
 //        }
 //
         runBlocking {
-            val users = userService.getUsers(15)
-            Log.d(TAG, "synchro: ${users}")
+            val country = CountryService.getCountry(15)
+            Log.d(TAG, "synchro: ${country}")
 
-            val countries = users.results.map {
+            val countries = country.results.map {
                 Country(
                     it.postalcode, it.name, it.countryCode
                 )

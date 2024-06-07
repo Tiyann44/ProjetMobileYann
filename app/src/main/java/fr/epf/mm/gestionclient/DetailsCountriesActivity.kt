@@ -55,6 +55,7 @@ class DetailsCountriesActivity : AppCompatActivity() {
         favoritesButton.click {
             val intent = Intent(this, ListCountriesActivity::class.java)
             startActivity(intent)
+            Toast.makeText(this, "country added to favorites", Toast.LENGTH_LONG).show()
     }
 }
 }

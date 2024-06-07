@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GestionClient2023MIN2</string>
+    <string name="app_name">Country Finder</string>
     <string name="client_last_name">Nom</string>
     <string name="add_button_label">Ajouter</string>
     <string name="client_gender">Sexe</string>
