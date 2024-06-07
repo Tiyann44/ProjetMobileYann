@@ -11,9 +11,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import fr.epf.mm.gestionclient.model.Client
+import fr.epf.mm.gestionclient.model.Country
 
-class DetailsClientActivity : AppCompatActivity() {
+class DetailsCountriesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details_client)
@@ -24,11 +24,11 @@ class DetailsClientActivity : AppCompatActivity() {
         val imageView = findViewById<ImageView>(R.id.details_client_imageview)
 
         intent.extras?.apply {
-            val client = getParcelable(CLIENT_ID_EXTRA) as? Client
+            val country = getParcelable(CLIENT_ID_EXTRA) as? Country
 
-            client?.let {
-                lastNameTextView.text = it.lastName
-                imageView.setImageResource(client.getImage())
+            country?.let {
+                lastNameTextView.text = it.postalcode
+                imageView.setImageResource(country.getImage())
             }
         }
 

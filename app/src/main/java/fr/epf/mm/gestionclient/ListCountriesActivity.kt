@@ -8,11 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import fr.epf.mm.gestionclient.model.Client
-import fr.epf.mm.gestionclient.model.Gender
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import fr.epf.mm.gestionclient.model.Country
 import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -22,16 +18,16 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 private const val TAG = "ListClientActivity"
 
-class ListClientActivity : AppCompatActivity() {
+class ListCountriesActivity : AppCompatActivity() {
 
     lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_list_client)
+        setContentView(R.layout.activity_list_countries)
 
         recyclerView =
-            findViewById<RecyclerView>(R.id.list_client_recyclerview)
+            findViewById<RecyclerView>(R.id.list_countries_recyclerview)
 
         recyclerView.layoutManager =
             LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false)
@@ -81,14 +77,13 @@ class ListClientActivity : AppCompatActivity() {
             val users = userService.getUsers(15)
             Log.d(TAG, "synchro: ${users}")
 
-            val clients = users.results.map {
-                Client(
-                    it.name.last, it.name.first,
-                    if (it.gender == "male") Gender.MAN else Gender.WOMAN
+            val countries = users.results.map {
+                Country(
+                    it.name.last, it.name.first, it.
                 )
             }
 
-            val adapter = ClientAdapter(clients)
+            val adapter = ClientAdapter(countries)
 
             recyclerView.adapter = adapter
 

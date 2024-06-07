@@ -10,6 +10,10 @@ interface RandomUserService {
 suspend  fun getUsers(@Query("results") size: Int) : GetUsersResult
 }
 
-data class GetUsersResult(val results: List<User>)
-data class User(val gender: String, val name: Name)
+data class GetUsersResult(val results: List<Country>)
+data class Country(val gender: String, val name: Name)
 data class Name(val last: String, val first: String)
+
+data class postalCode(val postal: String)
+
+data class countryCode(val countrycode: String)

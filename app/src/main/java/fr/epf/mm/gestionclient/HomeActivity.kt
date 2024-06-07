@@ -19,7 +19,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
         listButton.click {
-            val intent = Intent(this, ListClientActivity::class.java)
+            val intent = Intent(this, ListCountriesActivity::class.java)
             startActivity(intent)
         }
     }
