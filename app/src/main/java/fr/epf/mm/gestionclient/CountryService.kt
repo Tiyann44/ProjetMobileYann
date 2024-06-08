@@ -4,11 +4,15 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface RandomCountryService {
-    @GET("countryInfo")
-suspend  fun getCountry(@Query("Result") size: Int): GetCountriesResult
+    @GET("countryInfoJSON")
+    suspend fun getCountry(
+        @Query("username") username: String
+    ): GetCountriesResult
 }
 
-data class GetCountriesResult(val results: List<Country>)
-data class Country(val postalcode: String,
-                   val name: String,
-                   val countryCode: String,)
+data class GetCountriesResult(val geonames: List<Country>)
+data class Country(val countryCode: String, val countryName: String){
+    val Flag : String
+        get()="https://flagcdn.com/w20/${countryCode.lowercase()}.png"
+}
+

@@ -12,13 +12,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import com.bumptech.glide.Glide
 import fr.epf.mm.gestionclient.model.Country
 
 class DetailsCountriesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details_client)
-
+        val flaag = intent.getStringExtra(Flag)
         val NameTextView =
             findViewById<TextView>(R.id.details_country_name_textview)
 
@@ -28,11 +29,10 @@ class DetailsCountriesActivity : AppCompatActivity() {
             val country = getParcelable(COUNTRY_ID_EXTRA) as? Country
 
             country?.let {
-                NameTextView.text = it.postalcode
-                imageView.setImageResource(country.getImage())
+                NameTextView.text = it.name
             }
         }
-
+        Glide.with(this).load(flaag).into(imageView)
 
 
         val getImage = registerForActivityResult(
