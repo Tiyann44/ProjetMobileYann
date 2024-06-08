@@ -59,6 +59,10 @@ class DetailsCountriesActivity : AppCompatActivity() {
             addCountryToFavorites(countryCode, countryName, countryCapital, flag)
             Toast.makeText(this, "Country added to favorites", Toast.LENGTH_LONG).show()
         }
+        val deleteFavoritesButton = findViewById<Button>(R.id.delete_favorites_button)
+        deleteFavoritesButton.setOnClickListener {
+            deleteCountryFromFavorites()
+        }
     }
 
     private fun addCountryToFavorites(countryCode: String?, name: String?, capital: String?, flag: String?) {
@@ -72,6 +76,30 @@ class DetailsCountriesActivity : AppCompatActivity() {
         with(sharedPref.edit()) {
             putStringSet("favorites_set", favorites)
             apply()
+        }
+    }
+    private fun deleteCountryFromFavorites() {
+        val sharedPref = getSharedPreferences("favorites", Context.MODE_PRIVATE)
+        val gson = Gson()
+        val country = Country(
+            intent.getStringExtra("CountryCode") ?: "",
+            intent.getStringExtra("CountryName") ?: "",
+            intent.getStringExtra("CountryCapital") ?: "",
+            intent.getStringExtra("Flag") ?: ""
+        )
+        val countryJson = gson.toJson(country)
+
+        val favorites = sharedPref.getStringSet("favorites_set", mutableSetOf()) ?: mutableSetOf()
+
+        if (favorites.contains(countryJson)) {
+            favorites.remove(countryJson)
+            with(sharedPref.edit()) {
+                putStringSet("favorites_set", favorites)
+                apply()
+            }
+            Toast.makeText(this, "Country removed from favorites", Toast.LENGTH_LONG).show()
+        } else {
+            Toast.makeText(this, "Country is not in favorites", Toast.LENGTH_LONG).show()
         }
     }
 }
