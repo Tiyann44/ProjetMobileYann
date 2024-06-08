@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +26,7 @@ private const val TAG = "ListCountriesActivity"
 class ListCountriesActivity : AppCompatActivity(), CountryListener {
     private val geonamesUsername = "maxenceepf"
     lateinit var recyclerView: RecyclerView
+    private var countriesList: List<Country> = listOf() // Liste des pays
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +38,49 @@ class ListCountriesActivity : AppCompatActivity(), CountryListener {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.list_countries, menu)
-        return super.onCreateOptionsMenu(menu)
+
+        val searchItem = menu?.findItem(R.id.action_search)
+        val searchView = searchItem?.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                // Appelé lorsque l'utilisateur soumet la requête de recherche
+                // Lancer l'activité de détails pour le pays correspondant au texte de la recherche
+                searchCountry(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // Appelé chaque fois que le texte de la recherche est modifié
+                // Vous pouvez filtrer votre liste de pays ici, mais pour cette fonctionnalité,
+                // nous allons ignorer la recherche en temps réel et nous concentrer uniquement sur la soumission
+                return false
+            }
+        })
+
+        return true
+    }
+
+    private fun searchCountry(query: String?) {
+        // Logique de recherche pour trouver le pays correspondant au texte de la recherche
+        val foundCountry = countriesList.find {
+            it.name.equals(query, ignoreCase = true) ||
+                    it.capital.equals(query, ignoreCase = true)
+        }
+
+        if (foundCountry != null) {
+            val intent = Intent(this, DetailsCountriesActivity::class.java).apply {
+                putExtra("CountryCode", foundCountry.countryCode)
+                putExtra("CountryName", foundCountry.name)
+                putExtra("CountryCapital", foundCountry.capital)
+                putExtra("Flag", foundCountry.Flag)
+            }
+            startActivity(intent)
+        } else {
+            // Aucun pays correspondant trouvé
+            // Vous pouvez afficher un message à l'utilisateur ou effectuer une autre action
+            Log.e(TAG, "Aucun pays correspondant trouvé pour $query")
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -77,6 +121,9 @@ class ListCountriesActivity : AppCompatActivity(), CountryListener {
                         it.countryCode, it.countryName, it.capital, it.Flag
                     )
                 }
+
+                // Mise à jour de la liste des pays
+                countriesList = countries
 
                 withContext(Dispatchers.Main) {
                     val adapter = CountriesAdapter(countries, this@ListCountriesActivity)
