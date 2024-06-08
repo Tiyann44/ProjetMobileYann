@@ -20,9 +20,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
+
 private const val TAG = "ListCountriesActivity"
 
-class ListCountriesActivity : AppCompatActivity() {
+class ListCountriesActivity : AppCompatActivity(), CountryListener {
     private val geonamesUsername = "maxenceepf"
     lateinit var recyclerView: RecyclerView
 
@@ -40,7 +41,7 @@ class ListCountriesActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.action_favorites -> {
                 startActivity(Intent(this, FavoritesActivity::class.java))
             }
@@ -74,12 +75,12 @@ class ListCountriesActivity : AppCompatActivity() {
                 val response = countryService.getCountry(geonamesUsername)
                 val countries = response.geonames.map {
                     Country(
-                        it.countryCode, it.countryName
+                        it.countryCode, it.countryName, it.Flag
                     )
                 }
 
                 withContext(Dispatchers.Main) {
-                    val adapter = CountriesAdapter(countries)
+                    val adapter = CountriesAdapter(countries, this@ListCountriesActivity)
                     recyclerView.adapter = adapter
                 }
             } catch (e: HttpException) {
@@ -89,14 +90,13 @@ class ListCountriesActivity : AppCompatActivity() {
             }
         }
     }
-    override fun onClickCountry(country: Country){
-        val intent = Intent(this, DetailsCountriesActivity::class.java).apply{
-            putExtras("CountryCode", country.countryCode)
-            putExtras("CountryName", country.name)
-            putExtras("Flag", country.Flag)
 
+    override fun onClickCountry(country: Country) {
+        val intent = Intent(this, DetailsCountriesActivity::class.java).apply {
+            putExtra("CountryCode", country.countryCode)
+            putExtra("CountryName", country.name)
+            putExtra("Flag", country.Flag) // Assurez-vous que Flag est une propriété de votre modèle Country
         }
-
         startActivity(intent)
     }
 }

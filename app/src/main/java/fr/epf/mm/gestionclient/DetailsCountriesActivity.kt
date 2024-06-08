@@ -19,7 +19,7 @@ class DetailsCountriesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details_client)
-        val flaag = intent.getStringExtra(Flag)
+        val flaag = intent.getStringExtra("Flag")
         val NameTextView =
             findViewById<TextView>(R.id.details_country_name_textview)
 
