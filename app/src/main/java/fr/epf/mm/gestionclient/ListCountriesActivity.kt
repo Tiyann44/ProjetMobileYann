@@ -20,7 +20,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
-
 private const val TAG = "ListCountriesActivity"
 
 class ListCountriesActivity : AppCompatActivity(), CountryListener {
@@ -75,7 +74,7 @@ class ListCountriesActivity : AppCompatActivity(), CountryListener {
                 val response = countryService.getCountry(geonamesUsername)
                 val countries = response.geonames.map {
                     Country(
-                        it.countryCode, it.countryName, it.Flag
+                        it.countryCode, it.countryName, it.capital, it.Flag
                     )
                 }
 
@@ -95,7 +94,8 @@ class ListCountriesActivity : AppCompatActivity(), CountryListener {
         val intent = Intent(this, DetailsCountriesActivity::class.java).apply {
             putExtra("CountryCode", country.countryCode)
             putExtra("CountryName", country.name)
-            putExtra("Flag", country.Flag) // Assurez-vous que Flag est une propriété de votre modèle Country
+            putExtra("CountryCapital", country.capital)
+            putExtra("Flag", country.Flag)
         }
         startActivity(intent)
     }

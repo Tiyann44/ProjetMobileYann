@@ -8,6 +8,7 @@ import kotlinx.parcelize.Parcelize
 data class Country(
     val countryCode: String,
     val name: String,
+    val capital : String,
     val Flag : String
 ) : Parcelable{
     companion object {
@@ -16,6 +17,7 @@ data class Country(
             (1..size).map {
                 Country("countryCode${it}",
                     "name${it}",
+                    "capital${it}",
                     "Flag${it}"
 
                     )

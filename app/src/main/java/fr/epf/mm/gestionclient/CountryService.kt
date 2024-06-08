@@ -11,8 +11,7 @@ interface RandomCountryService {
 }
 
 data class GetCountriesResult(val geonames: List<CountryResp>)
-data class CountryResp(val countryCode: String, val countryName: String){
-    val Flag : String
-        get()="https://flagcdn.com/w20/${countryCode.lowercase()}.png"
+data class CountryResp(val countryCode: String, val countryName: String, val capital: String) {
+    val Flag: String
+        get() = "https://flagcdn.com/w20/${countryCode.lowercase()}.png"
 }
-

@@ -19,21 +19,19 @@ class DetailsCountriesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details_client)
-        val flaag = intent.getStringExtra("Flag")
-        val NameTextView =
-            findViewById<TextView>(R.id.details_country_name_textview)
 
+        val flag = intent.getStringExtra("Flag")
+        val countryName = intent.getStringExtra("CountryName")
+        val countryCapital = intent.getStringExtra("CountryCapital")
+
+        val nameTextView = findViewById<TextView>(R.id.details_country_name_textview)
+        val capitalTextView = findViewById<TextView>(R.id.details_country_capital_textview)
         val imageView = findViewById<ImageView>(R.id.details_country_imageview)
 
-        intent.extras?.apply {
-            val country = getParcelable(COUNTRY_ID_EXTRA) as? Country
+        nameTextView.text = countryName
+        capitalTextView.text = countryCapital
 
-            country?.let {
-                NameTextView.text = it.name
-            }
-        }
-        Glide.with(this).load(flaag).into(imageView)
-
+        Glide.with(this).load(flag).into(imageView)
 
         val getImage = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
@@ -42,20 +40,19 @@ class DetailsCountriesActivity : AppCompatActivity() {
                 val bitmap = result?.data?.extras?.getParcelable("data") as? Bitmap
                 imageView.setImageBitmap(bitmap)
                 Toast.makeText(this, "Photo mise à jour", Toast.LENGTH_SHORT).show()
-
             }
         }
 
-        imageView.click {
-            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        imageView.setOnClickListener {
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             getImage.launch(intent)
         }
 
         val favoritesButton = findViewById<Button>(R.id.favorites_button)
-        favoritesButton.click {
+        favoritesButton.setOnClickListener {
             val intent = Intent(this, ListCountriesActivity::class.java)
             startActivity(intent)
-            Toast.makeText(this, "country added to favorites", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Country added to favorites", Toast.LENGTH_LONG).show()
+        }
     }
-}
 }
