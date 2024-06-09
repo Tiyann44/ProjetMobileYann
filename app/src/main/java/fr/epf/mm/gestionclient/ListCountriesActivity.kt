@@ -25,9 +25,9 @@ import kotlin.random.Random
 private const val TAG = "ListCountriesActivity"
 
 class ListCountriesActivity : AppCompatActivity(), CountryListener {
-    private val geonamesUsername = "maxenceepf"
+    private val geonamesUsername = "Tiyann"
     lateinit var recyclerView: RecyclerView
-    private var countriesList: List<Country> = listOf() // Liste des pays
+    private var countriesList: List<Country> = listOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +60,6 @@ class ListCountriesActivity : AppCompatActivity(), CountryListener {
     }
 
     private fun searchCountry(query: String?) {
-        // Logique de recherche pour trouver le pays correspondant au texte de la recherche
         val foundCountry = countriesList.find {
             it.name.equals(query, ignoreCase = true) ||
                     it.capital.equals(query, ignoreCase = true)
@@ -75,8 +74,7 @@ class ListCountriesActivity : AppCompatActivity(), CountryListener {
             }
             startActivity(intent)
         } else {
-            // Aucun pays correspondant trouvé
-            // Vous pouvez afficher un message à l'utilisateur ou effectuer une autre action
+
             Log.e(TAG, "Aucun pays correspondant trouvé pour $query")
         }
     }
@@ -128,7 +126,6 @@ class ListCountriesActivity : AppCompatActivity(), CountryListener {
                     )
                 }
 
-                // Mise à jour de la liste des pays
                 countriesList = countries
 
                 withContext(Dispatchers.Main) {

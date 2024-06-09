@@ -22,7 +22,7 @@ import fr.epf.mm.gestionclient.model.Country
 class DetailsCountriesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_details_client)
+        setContentView(R.layout.activity_details_country)
 
         val countryCode = intent.getStringExtra("countryCode")
         val flag = intent.getStringExtra("Flag")

@@ -15,31 +15,30 @@ class HelpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_help)
 
-        // Bouton "Read the documentation"
+
         val documentationButton: Button = findViewById(R.id.documentation_button)
         documentationButton.setOnClickListener {
-            // URL de la documentation
+
             val documentationUrl = "https://github.com/Tiyann44/CountryFinderDocumentation/blob/main/README.md"
-            // Intention pour ouvrir le navigateur
+
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(documentationUrl))
             startActivity(intent)
         }
 
-        // Vous pouvez ajouter des écouteurs de clic pour les autres boutons ici
-        // Bouton "get Rickrolled"
+
         val getRickrolledButton: Button = findViewById(R.id.getRickrolled_button)
         getRickrolledButton.setOnClickListener {
-            // URL de la vidéo Rickroll
+
             val rickrollUrl = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-            // Intention pour ouvrir le navigateur
+
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(rickrollUrl))
             startActivity(intent)
         }
 
-        // Bouton "Buy me a virtual coffee"
+
         val buyMeACoffeeButton: Button = findViewById(R.id.buymeacoffee_button)
         buyMeACoffeeButton.setOnClickListener {
-            // Afficher un toast
+
             Toast.makeText(this, "Thanks for the virtual coffee!", Toast.LENGTH_SHORT).show()
         }
     }
