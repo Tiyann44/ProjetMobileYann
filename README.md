@@ -4,7 +4,7 @@ Bonjour et bienvenue dans cette documentation utilisateur.
 
 L'application *Country Finder* permet de trouver le pays que vous souhaitez en scrollant ou en utilisant la barre de recherche.
 
-Avant toute chose, appuyez sur le bouton *synchro*, en haut à gauche de votre application. Il permet de charger les pays.
+Avant toute chose, appuyez sur le bouton *synchro*, en haut à gauche de votre application. Il permet de charger les pays, et devra être cliqué à chaque fois que vous reviendrez sur la page principale (ou que vous souhaitez utiliser la fonctionnalité "I'm feeling lucky".
 
 ![Capture d'écran 2024-06-09 131345](https://github.com/Tiyann44/CountryFinderDocumentation/assets/135506893/1ad461c6-738a-4049-99ad-b0eef816759a)
 
@@ -32,9 +32,9 @@ Vous pouvez cliquer sur n'importe quel pays présent dans la liste pour avoir ac
 
 Pour accéder au menu aide, cliquez en haut à gauche sur les trois points, puis sur *Help*, ou alors cliquez sur le petit logo *interrogation* si ce dernier s'affiche.
 
-Cliquez sur "read the documentation"pour accéder à la documentation (normalement, vous avez réussi si vous êtes là)
+Cliquez sur "read the documentation"pour accéder à la documentation (normalement, vous avez réussi si vous êtes là).
 
-Cliquez sur "Get Rickrolled" pour vous faire rickroller
+Cliquez sur "Get Rickrolled" pour vous faire rickroller.
 
 Cliquez sur "Buy me a virtual coffee" pour me rendre virtuellement riche.
 
@@ -43,3 +43,4 @@ Cliquez sur "Buy me a virtual coffee" pour me rendre virtuellement riche.
 ## I'm feeling lucky
 
 En cliquant sur ce bouton, vous serez redirigé sur un pays aléatoire. Si ça c'est pas beau comme feature !
+(ne peut être utilisé que sur la page pricipale chargée)
