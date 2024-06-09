@@ -40,4 +40,13 @@
         android:title="Home"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/action_feeling_lucky"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/baseline_tag_faces_24"
+        android:title="I'm feeling lucky"
+        app:showAsAction="ifRoom" />
+
+
 </menu>

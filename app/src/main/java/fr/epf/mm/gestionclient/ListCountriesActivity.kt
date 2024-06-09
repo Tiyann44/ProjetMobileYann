@@ -20,6 +20,7 @@ import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
+import kotlin.random.Random
 
 private const val TAG = "ListCountriesActivity"
 
@@ -92,6 +93,9 @@ class ListCountriesActivity : AppCompatActivity(), CountryListener {
             R.id.action_synchro -> {
                 synchro()
             }
+            R.id.action_feeling_lucky -> {
+                navigateToRandomCountry()
+            }
 
         }
         return super.onOptionsItemSelected(item)
@@ -147,5 +151,21 @@ class ListCountriesActivity : AppCompatActivity(), CountryListener {
             putExtra("Flag", country.Flag)
         }
         startActivity(intent)
+    }
+    private fun navigateToRandomCountry() {
+        if (countriesList.isNotEmpty()) {
+            val randomIndex = Random.nextInt(countriesList.size)
+            val randomCountry = countriesList[randomIndex]
+
+            val intent = Intent(this, DetailsCountriesActivity::class.java).apply {
+                putExtra("CountryCode", randomCountry.countryCode)
+                putExtra("CountryName", randomCountry.name)
+                putExtra("CountryCapital", randomCountry.capital)
+                putExtra("Flag", randomCountry.Flag)
+            }
+            startActivity(intent)
+        } else {
+            Log.e(TAG, "La liste des pays est vide, synchronisez d'abord les données.")
+        }
     }
 }
