@@ -44,16 +44,13 @@ class ListCountriesActivity : AppCompatActivity(), CountryListener {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                // Appelé lorsque l'utilisateur soumet la requête de recherche
-                // Lancer l'activité de détails pour le pays correspondant au texte de la recherche
+
                 searchCountry(query)
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                // Appelé chaque fois que le texte de la recherche est modifié
-                // Vous pouvez filtrer votre liste de pays ici, mais pour cette fonctionnalité,
-                // nous allons ignorer la recherche en temps réel et nous concentrer uniquement sur la soumission
+
                 return false
             }
         })
@@ -85,12 +82,17 @@ class ListCountriesActivity : AppCompatActivity(), CountryListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.action_help -> {
+                startActivity(Intent(this, HelpActivity::class.java))
+            }
+
             R.id.action_favorites -> {
                 startActivity(Intent(this, FavoritesActivity::class.java))
             }
             R.id.action_synchro -> {
                 synchro()
             }
+
         }
         return super.onOptionsItemSelected(item)
     }

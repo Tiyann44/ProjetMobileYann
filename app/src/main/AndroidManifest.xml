@@ -31,6 +31,10 @@
             android:name=".FavoritesActivity"
             android:exported="true" />
 
+        <activity
+            android:name=".HelpActivity"
+            android:exported="true" />
+
 
     </application>
 

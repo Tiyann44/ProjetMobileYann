@@ -7,6 +7,8 @@ import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -65,11 +67,17 @@ class DetailsCountriesActivity : AppCompatActivity() {
         }
     }
 
-    private fun addCountryToFavorites(countryCode: String?, name: String?, capital: String?, flag: String?) {
+    private fun addCountryToFavorites(
+        countryCode: String?,
+        name: String?,
+        capital: String?,
+        flag: String?
+    ) {
         val sharedPref = getSharedPreferences("favorites", Context.MODE_PRIVATE)
-        val favorites = sharedPref.getStringSet("favorites_set", mutableSetOf())?.toMutableSet() ?: mutableSetOf()
+        val favorites = sharedPref.getStringSet("favorites_set", mutableSetOf())?.toMutableSet()
+            ?: mutableSetOf()
 
-        val country = Country(countryCode?: "",name ?: "", capital ?: "", flag ?: "")
+        val country = Country(countryCode ?: "", name ?: "", capital ?: "", flag ?: "")
         val gson = Gson()
         favorites.add(gson.toJson(country))
 
@@ -78,6 +86,7 @@ class DetailsCountriesActivity : AppCompatActivity() {
             apply()
         }
     }
+
     private fun deleteCountryFromFavorites() {
         val sharedPref = getSharedPreferences("favorites", Context.MODE_PRIVATE)
         val gson = Gson()
@@ -101,5 +110,26 @@ class DetailsCountriesActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "Country is not in favorites", Toast.LENGTH_LONG).show()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.list_countries, menu)
+        return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+
+            R.id.action_favorites -> {
+                startActivity(Intent(this, FavoritesActivity::class.java))
+            }
+            R.id.action_home -> {
+                startActivity(Intent(this, ListCountriesActivity::class.java))
+            }
+            R.id.action_help -> {
+                startActivity(Intent(this, HelpActivity::class.java))
+            }
+
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
