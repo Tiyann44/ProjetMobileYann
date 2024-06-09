@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class HelpActivity : AppCompatActivity() {
@@ -18,7 +19,7 @@ class HelpActivity : AppCompatActivity() {
         val documentationButton: Button = findViewById(R.id.documentation_button)
         documentationButton.setOnClickListener {
             // URL de la documentation
-            val documentationUrl = "https://docs.google.com/document/d/1gQZ70wIrHJLu4pBRgKwLi1DieIrA-WdxbhjBAcBwMH8/edit?usp=sharing"
+            val documentationUrl = "https://github.com/Tiyann44/CountryFinderDocumentation/blob/main/README.md"
             // Intention pour ouvrir le navigateur
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(documentationUrl))
             startActivity(intent)
@@ -38,11 +39,8 @@ class HelpActivity : AppCompatActivity() {
         // Bouton "Buy me a virtual coffee"
         val buyMeACoffeeButton: Button = findViewById(R.id.buymeacoffee_button)
         buyMeACoffeeButton.setOnClickListener {
-            // URL pour acheter un café virtuel
-            val buyMeACoffeeUrl = "https://www.buymeacoffee.com/example"
-            // Intention pour ouvrir le navigateur
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(buyMeACoffeeUrl))
-            startActivity(intent)
+            // Afficher un toast
+            Toast.makeText(this, "Thanks for the virtual coffee!", Toast.LENGTH_SHORT).show()
         }
     }
 
