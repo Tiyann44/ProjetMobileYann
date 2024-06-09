@@ -17,7 +17,6 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import fr.epf.mm.gestionclient.model.Country
 
 class DetailsCountriesActivity : AppCompatActivity() {
@@ -98,15 +97,19 @@ class DetailsCountriesActivity : AppCompatActivity() {
         )
         val countryJson = gson.toJson(country)
 
-        val favorites = sharedPref.getStringSet("favorites_set", mutableSetOf()) ?: mutableSetOf()
+        val favorites = sharedPref.getStringSet("favorites_set", mutableSetOf())?.toMutableSet()
+            ?: mutableSetOf()
 
         if (favorites.contains(countryJson)) {
             favorites.remove(countryJson)
             with(sharedPref.edit()) {
                 putStringSet("favorites_set", favorites)
-                apply()
+                apply() // Persist the changes
             }
             Toast.makeText(this, "Country removed from favorites", Toast.LENGTH_LONG).show()
+            // Redirect to FavoritesActivity
+            startActivity(Intent(this, FavoritesActivity::class.java))
+            finish() // Finish the current activity to remove it from the back stack
         } else {
             Toast.makeText(this, "Country is not in favorites", Toast.LENGTH_LONG).show()
         }
@@ -116,9 +119,9 @@ class DetailsCountriesActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.list_countries, menu)
         return true
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-
             R.id.action_favorites -> {
                 startActivity(Intent(this, FavoritesActivity::class.java))
             }
@@ -128,7 +131,6 @@ class DetailsCountriesActivity : AppCompatActivity() {
             R.id.action_help -> {
                 startActivity(Intent(this, HelpActivity::class.java))
             }
-
         }
         return super.onOptionsItemSelected(item)
     }
